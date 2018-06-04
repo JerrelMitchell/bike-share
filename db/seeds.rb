@@ -34,6 +34,3 @@ ITEM = ["Cycling Computer", "Bike Computer", "Tail Light", "Saddle Bag",
 ITEM.map do |name|
   Accessory.create(title: name, description: 'Delicious!', thumbnail: 'bike_horse.jpg', price: 10 )
 end
-
-26.times do
-end
