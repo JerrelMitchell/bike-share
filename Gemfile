@@ -48,6 +48,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'paperclip'
+  gem "nyan-cat-formatter"
 end
 
 group :development do

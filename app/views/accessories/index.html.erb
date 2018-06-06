@@ -5,7 +5,11 @@
         <img ><%= image_tag(accessory.thumbnail) %></img>
       </div>
     <%= accessory.title %></br>
+    <% if accessory.role == "active" %>
     <%= button_to "Add to Cart", carts_path(id: accessory.id), class: "btn btn-danger" %>
+    <% else %>
+    <h4><i>This product is currently <%= accessory.role %></i></h4>
+    <% end %>
     <%= link_to "View Details", accessory_path(accessory) %>
     </div>
   <% end %>

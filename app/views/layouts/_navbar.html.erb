@@ -2,6 +2,11 @@
 <% content_for :visitor do %>
 <div class="header">
     <section class="grid">
+      <section class="box1">
+        <span><% flash.each do |type, message| %>
+          <%= content_tag :div, sanitize(message), class: type %>
+        <% end %></span>
+      </section>
       <section class="box2">
           <div>
             <a href='/cart'>
@@ -38,8 +43,11 @@
   <div class="header">
       <section class="grid">
         <section class="box1">
+          <span><% flash.each do |type, message| %>
+              <%= content_tag :div, sanitize(message), class: type %>
+          <% end %></span>
           <% if !current_user.nil? && !current_user.admin? %>
-          <span class="htext">Logged in as <%= current_user.username %></span>
+            <span class="htext">Logged in as <%= current_user.username %></span>
           <%end%>
           <% if !current_user.nil? && current_user.admin? %>
           <span class="htext">Logged in as Admin: <%= current_user.username %></span>
@@ -74,7 +82,11 @@
       <% else %>
       <li><a href="/bike-shop" target="_self">Accessories</a></li>
       <% end %>
-      <% if !current_user.nil? %>
+      <% if !current_user.nil? && current_user.admin?%>
+        <li><a href="/admin/dashboard" target="_self">Dashboard</a></li>
+      <%end%>
+      <% if !current_user.nil? && !current_user.admin? %>
+        <li><a href="/dashboard" target="_self">Dashboard</a></li>
         <li><a href="/trips-dashboard" target="_self">Trips Dashboard</a></li>
         <li><a href="/stations-dashboard" target="_self">Station Dashboard</a></li>
       <%end%>

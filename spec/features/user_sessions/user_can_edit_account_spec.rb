@@ -19,7 +19,7 @@ describe 'user or admin' do
 
       click_on 'Update User'
 
-      expect(current_path).to eq(user_dashboard_path(User.last.id))
+      expect(current_path).to eq(dashboard_path(User.last.id))
     end
   end
   context 'does not completely fill out edit account form' do

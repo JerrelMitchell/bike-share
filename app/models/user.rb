@@ -4,6 +4,7 @@ class User < ApplicationRecord
   validates :username, uniqueness: true, presence: true
 
   has_many :accessories, dependent: :destroy
+  has_many :orders, dependent: :destroy
 
   enum role:[:default, :admin]
 end

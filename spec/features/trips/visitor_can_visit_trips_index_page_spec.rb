@@ -6,8 +6,8 @@ describe 'opens trips index page' do
       Station.create(name: 'Fort', dock_count: 5, city: "Fort Collins")
       Station.create(name: 'Blake', dock_count: 5, city: "Fort Collins")
       35.times do
-        Trip.create!(duration: 63, start_date: '8/29/2013 14:13',
-                     start_station_id: 1, end_date: '8/30/2013 11:14',
+        Trip.create!(duration: 63, start_date: Date.today.strftime("%m/%d/%Y"),
+                     start_station_id: 1, end_date: Date.tomorrow.strftime("%m/%d/%Y"),
                      end_station_id: 2, bike_id: 520,
                      subscription_type: 'Subscriber', zip_code: 94127)
       end
@@ -17,9 +17,7 @@ describe 'opens trips index page' do
 
       expect(page).to have_content('Trips')
       expect(page).to have_content(trip.duration, count: 30)
-      expect(page).to have_content(trip.start_date, count: 30)
       expect(page).to have_content(trip.start_station.name, count: 30)
-      expect(page).to have_content(trip.end_date, count: 30)
       expect(page).to have_content(trip.end_station.name, count: 30)
       expect(page).to have_content(trip.bike_id, count: 30)
       expect(page).to have_content(trip.subscription_type, count: 30)

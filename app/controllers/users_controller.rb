@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     @user = User.create(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to user_dashboard_path(@user)
+      redirect_to dashboard_path(@user)
     else
       flash[:notice] = 'That username is taken, or information submitted was incomplete. Try again.'
       render :new
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   def update
     @user.update(user_params)
     if @user.update_attributes(user_params)
-      redirect_to user_dashboard_path(@user), notice: 'User was successfully updated.'
+      redirect_to dashboard_path(@user), notice: 'User was successfully updated.'
     else
       flash[:notice] = 'Please make sure your passwords match!'
       render :edit

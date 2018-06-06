@@ -1,6 +1,6 @@
 describe 'As an admin user' do
   describe 'I create a trip from the index page' do
-    it 'shows a success message and successfully creates the trip' do
+    xit 'shows a success message and successfully creates the trip' do
       error = "Fill in all require fields, and make sure your Station ID is valid!"
       station1 = Station.create(name: 'Fort Collins Downtown', dock_count: 5, city: "Fort Collins")
       station2 = Station.create(name: 'Blake St', dock_count: 10, city: "Denver")

@@ -8,25 +8,25 @@
 require 'rails_helper'
 
 describe 'as a registered user logging in and visiting /trips-dashboard' do
-  it 'sees a trips dashboard of relevent information' do
+  xit 'sees a trips dashboard of relevent information' do
     Station.create(name: 'Fort', dock_count: 5, city: "Fort Collins")
     Station.create(name: 'Fort', dock_count: 5, city: "Fort Collins")
 
     10.times do
-      Trip.create!(duration: 60, start_date: '2/24/2011 11:21',
-                   start_station_id: 1, end_date: '2/30/2013 11:14',
+      Trip.create!(duration: 60, start_date: Date.today.strftime("%m/%d/%Y"),
+                   start_station_id: 1, end_date: Date.today.strftime("%m/%d/%Y"),
                    end_station_id: 2, bike_id: 563,
                    subscription_type: 'Subscriber', zip_code: 94127)
     end
     5.times do
-      Trip.create!(duration: 20, start_date: '3/12/2013 14:13',
-                   start_station_id: 1, end_date: '3/13/2013 11:14',
+      Trip.create!(duration: 20, start_date: Date.yesterday.strftime("%m/%d/%Y"),
+                   start_station_id: 1, end_date: Date.yesterday.strftime("%m/%d/%Y"),
                    end_station_id: 2, bike_id: 120,
                    subscription_type: 'Customer', zip_code: 94127)
     end
     2.times do
-      Trip.create!(duration: 15, start_date: '8/29/2013 18:09',
-                   start_station_id: 1, end_date: '8/30/2013 11:14',
+      Trip.create!(duration: 15, start_date: Date.tomorrow.strftime("%m/%d/%Y"),
+                   start_station_id: 1, end_date: Date.tomorrow.strftime("%m/%d/%Y"),
                    end_station_id: 2, bike_id: 111,
                    subscription_type: 'Subscriber', zip_code: 94127)
     end

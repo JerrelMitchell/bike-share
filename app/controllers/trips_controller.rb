@@ -24,17 +24,17 @@ class TripsController < ApplicationController
     @least_ridden_bike_count = least_ridden_bike_stats[1]
 
     most_popular_date_stats  = Trip.most_popular_date
-    @most_popular_date       = most_popular_date_stats[0]
+    @most_popular_date       = most_popular_date_stats[0].strftime("%m/%d/%Y")
     @most_popular_date_count = most_popular_date_stats[1]
 
     least_popular_date_stats  = Trip.least_popular_date
-    @least_popular_date       = least_popular_date_stats[0]
+    @least_popular_date       = least_popular_date_stats[0].strftime("%m/%d/%Y")
     @least_popular_date_count = least_popular_date_stats[1]
 
     @subscription_types_breakdown = Trip.subscription_type_breakdown
 
     @monthly_breakdown = Trip.monthly_breakdown
-    @yearly_breakdown = Trip.yearly_breakdown
+    @yearly_breakdown  = Trip.yearly_breakdown
   end
 
   private

@@ -21,7 +21,7 @@ describe 'Visitor index page' do
     accessory = create(:accessory, title: "Pizza Cat 1", id: 1)
 
     visit '/bike-shop'
-    
+
     within first("div.accessories") do
       click_on "Add to Cart"
     end
@@ -41,12 +41,12 @@ describe 'Visitor index page' do
 
     create(:accessory)
 
-    visit '/bike-shop'
+    visit accessories_path
 
-    expect(page).to have_content('Cart: 0')
+    expect(page).to have_content('0')
 
     click_on "Add to Cart"
 
-    expect(page).to have_content('Cart: 1')
+    expect(page).to have_content('1')
   end
 end

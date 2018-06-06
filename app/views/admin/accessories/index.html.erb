@@ -6,12 +6,18 @@
       <img ><%= image_tag(accessory.thumbnail) %></img>
     </div>
   <%= accessory.title %></br>
-  <%= accessory.description %>
-  <%= button_to "Edit", edit_admin_accessory_path(accessory.id), class: "btn btn-danger" %>
-  <% if accessory.role == 0 %>
-  <%= button_to "Reactivate", admin_update_accessory_path(accessory)%>
-  <% else %>
-  <%= button_to "Retire", admin_update_accessory_path(accessory)%>
+  <%= accessory.description %><br>
+  <%= link_to "Edit", edit_admin_accessory_path(accessory), class: "btn btn-danger" %>
+  <% if accessory.active? %>
+    <%= form_for [:admin, accessory] do |f| %>
+      <%= f.hidden_field :role, value: 'inactive' %>
+      <%= f.submit  'Retire' %>
+      <% end %>
+    <% else %>
+    <%= form_for [:admin, accessory] do |f| %>
+      <%= f.hidden_field :role, value: 'active' %>
+      <%= f.submit  'Reactivate' %>
+    <% end %>
   <% end %>
   <%= link_to "View Details", admin_bike_shop_path(accessory) %>
   </div>

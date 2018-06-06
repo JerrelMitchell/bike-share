@@ -9,10 +9,6 @@
   </head>
 
   <body>
-    <% flash.each do |type, message| %>
-    <%= content_tag :div, sanitize(message), class: type %>
-    <% end %>
-
     <div class="cart-tracker">
     </div>
     <container>
@@ -28,8 +24,5 @@
      <% end %>
      <%= yield %>
    </container>
-   <span><% flash.each do |type, message| %>
-   <%= content_tag :div, message, class: type %>
-   <% end %></span>
   </body>
 </html>

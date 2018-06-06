@@ -1,10 +1,3 @@
 <h1>Bike Shop:</h1>
 <h2>Create an Accessory</h2>
-
-<%= form_for :accessory do |f| %>
-  Title: <%= f.text_field :title %><br />
-  Price: <%= f.text_field :price%><br />
-  Description: <%= f.text_field :description %><br />
-  Image : <%= f.text_area :thumbnail, default_url: ':images/streamer.jpg'%><br >
-  <%= f.submit %>
-<% end %>
+<span id='create_accessory'><%= render 'form', accessory: @accessory, user: current_user %></span>

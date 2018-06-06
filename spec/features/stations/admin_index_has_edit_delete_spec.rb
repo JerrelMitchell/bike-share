@@ -35,18 +35,19 @@ describe 'visitor' do
 
       visit stations_path
 
-      # expect(page).to have_button('Edit')
-
       click_link('Edit')
 
-      expect(current_path).to eq(edit_station_path(station1))
+      expect(current_path).to eq(edit_admin_station_path(station1))
     end
 
     it 'should update and redirect to station show page' do
+      admin = User.create(username: "penelope", password: "boom", role: 1)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
+
       station = Station.create(name: 'China', dock_count: 5, city: "Fort Collins")
       date = Date.strptime("6/15/2012", '%m/%d/%Y')
 
-      visit edit_station_path(station)
+      visit edit_admin_station_path(station)
 
       fill_in 'station[name]', with: 'LaFox'
       fill_in 'station[dock_count]', with: '11'
@@ -66,11 +67,11 @@ describe 'visitor' do
       admin = User.create(username: "penelope", password: "boom", role: 1)
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
 
-      station1 = Station.create(name: 'Fort Collins Downtown', dock_count: 5, city: "Fort Collins")
+      Station.create(name: 'Fort Collins Downtown', dock_count: 5, city: "Fort Collins")
 
       visit stations_path
 
-      # expect(page).to have_button('Edit')
+      expect(page).to have_link('Edit')
 
       click_link('Delete')
 

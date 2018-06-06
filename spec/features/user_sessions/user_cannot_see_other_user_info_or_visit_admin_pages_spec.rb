@@ -10,7 +10,6 @@ describe 'user' do
 
       visit new_admin_trip_path
 
-      expect(page).to have_content("Logged in as: #{user.username}")
       expect(page).to have_content("The page you were looking for doesn't exist.")
       expect(page).to_not have_content("Create a new user!")
     end

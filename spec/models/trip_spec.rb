@@ -7,14 +7,14 @@ RSpec.describe Trip, type: :model do
     10.times do
       Station.create(name: 'Santa Fe', dock_count: 5, city: 'Fort Collins')
       Station.create(name: 'Park', dock_count: 5, city: 'Fort Collins')
-      Trip.create!(duration: 60, start_date: '8/29/2013 14:13',
-                   start_station_id: 1, end_date: '8/30/2013 11:14',
+      Trip.create!(duration: 60, start_date: Time.now,
+                   start_station_id: 1, end_date: Time.now,
                    end_station_id: 2, bike_id: 520,
                    subscription_type: 'Subscriber', zip_code: 94127)
     end
     5.times do
-      Trip.create!(duration: 20, start_date: '7/15/2013 10:13',
-                   start_station_id: 1, end_date: '7/15/2011 11:14',
+      Trip.create!(duration: 20, start_date: Time.now,
+                   start_station_id: 1, end_date: Time.now,
                    end_station_id: 2, bike_id: 55,
                    subscription_type: 'Customer', zip_code: 93123)
     end
@@ -61,11 +61,11 @@ RSpec.describe Trip, type: :model do
     end
 
     it 'Trip#most_popular_date' do
-      expect(Trip.most_popular_date).to eq(['8/29/2013 14:13', 10])
+      expect(Trip.most_popular_date).to eq([Date.today, 15])
     end
 
     it 'Trip#least_popular_date' do
-      expect(Trip.least_popular_date).to eq(['7/15/2013 10:13', 5])
+      expect(Trip.least_popular_date).to eq([Date.today, 15])
     end
 
     it 'Trip#subscription_type_percents' do

@@ -5,5 +5,9 @@
   <h3>Accessory: <%= @accessory.title  %></h3>
   <h4>Price: <%= number_to_currency(@accessory.price) %></h4>
   <li><%= @accessory.description %></li>
+  <% if @accessory.role == "active" %>
   <%= button_to "Add to Cart", carts_path(id: @accessory.id), class: "btn btn-danger" %>
+  <% else %>
+  <h4><i>This product is currently retired(<%=link_to @accessory.role, accessories_path %>)</i></h4>
+  <% end %>
 </ul>

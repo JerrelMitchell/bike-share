@@ -17,7 +17,7 @@ describe 'visitor' do
       fill_in :password, with: user.password
       click_button 'Log In'
 
-      expect(current_path).to eq(user_dashboard_path(user))
+      expect(current_path).to eq(dashboard_path)
       expect(page).to have_link('Log Out')
     end
     it 'can log out of account after signing in' do
@@ -50,7 +50,7 @@ describe 'visitor' do
 
       click_on 'Create User'
 
-      expect(current_path).to eq(user_dashboard_path(User.last.id))
+      expect(current_path).to eq(dashboard_path(User.last.id))
       expect(page).to have_content(username)
     end
 

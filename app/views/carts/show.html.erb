@@ -8,25 +8,28 @@
     <img><%= image_tag(item.thumbnail) %></img>
   </div>
   <h3>Accessory: <%= item.title %></h3>
-  <h4>Price: <%= number_to_currency(quantity * item.price) %></h4>
+  <h3>Price: <%= number_to_currency(item.price) %></h3>
 
-<h3>Quantity: <%= quantity %><%= button_to "+", carts_path(item_id: item.id), method: 'patch' %>
+  <h3>Quantity: <%= quantity %><%= button_to "+", carts_path(item_id: item.id), method: 'patch' %>
                              <%= button_to "-", carts_path(item_id: item.id, decrease: true), method: 'patch' %></h3>
 
+  <h3>Subtotal: <%= number_to_currency(quantity * item.price) %></h3>
   <%= button_to "Remove", cart_destroy_path(item_id), :data => {:confirm => "You sure?"}, :method => "delete" %>
 
 
 </div>
 
   <% end %>
+<div class="total">
 
-<h2>Total:</h2>
-<%= number_to_currency(@cart.total_accessory_value) %>
+  <h2>Total:</h2>
+  <%= number_to_currency(@cart.total_accessory_value) %>
+  </div>
 
 
   <div class="checkout">
   <% if current_user %>
-  <h2><%= link_to "Check Out", user_dashboard_path(current_user) %></h2>
+  <h2><%= link_to "Check Out", orders_path, method: 'POST'%></h2>
   <% else %>
   <%= link_to "Check Out", login_path %>
   <% end %>

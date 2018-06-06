@@ -1,0 +1,45 @@
+<main>
+  <h1>Order: <%=@order.id%> Created at: <%=@order.created_at%></h1>
+  <h3>Status: <%= @order.status %></h3>
+
+  <% if @order.status == 'ordered' %>
+  <%= link_to 'Cancel', admin_order_path(order, "order[status]" => 'cancelled'), method: :put, type: 'submit' %></br>
+  <%= link_to "Mark as paid", admin_order_path(order, "order[status]" => 'paid'), method: :put, type: 'submit' %></br>
+<% end %>
+
+   <% if @order.status == 'paid' %>
+     <%= link_to "Cancel", admin_order_path(@order, "order[status]" => 'cancelled'), method: :put, type: 'submit' %></br>
+     <%= link_to "Mark as Completed", admin_order_path(@order, "order[status]" => 'completed'), method: :put, type: 'submit' %></br>
+<% end %>
+  <% if @order.status == "completed" || "cancelled"%>
+    <h1>Updated at: <%=@order.updated_at%></h1>
+  <%end%>
+  <% if !current_user.nil? && current_user.admin? %>
+    <%= link_to "Edit", edit_admin_order_path(@order) %>
+    <%= link_to "Delete", admin_order_path(@order), method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
+<table class="order">
+  <thead>
+    <tr>
+      <th>Accessory Name</th>
+      <th>Quantity</th>
+      <th>Subtotal</th>
+    </tr>
+    </thead>
+      <tbody>
+      <tr class=order_<%= @order.id %>>
+        <% @order.accessories.uniq.each do |accessory|%>
+        <tr>
+          <td><%= link_to accessory.title, accessory_path(accessory) %></td>
+          <td><%= accessory.quantity(@order.id) %></td>
+          <td><%= accessory.subtotal(@order.id) %></td>
+        <%end%>
+        </tr>
+    </tbody>
+    <tfoot>
+    <tf>Customer Name: <%= @order.user.full_name %></tf>
+    <tf>Address: <%= @order.user.address %> </tf>
+    <tf>Total: <%= @order.total_price %></tf>
+    </tfoot>
+  </table>
+</main>

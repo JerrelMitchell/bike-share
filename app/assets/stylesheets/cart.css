@@ -24,3 +24,7 @@ div.item {
 div.cart-tracker {
   text-align: right;
 }
+
+.total {
+  text-align: center;
+}

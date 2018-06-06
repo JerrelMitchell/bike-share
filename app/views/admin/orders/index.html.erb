@@ -1,0 +1,32 @@
+<h2>Orders</h2>
+    <main>
+<% @grouped_by_status.each do |status, qty| %>
+  <p>Number of <%= status%> orders: <%= qty %></p>
+<%end%>
+<table class="order">
+  <%= link_to 'All', admin_dashboard_path%></br>
+<%= link_to 'Cancelled Orders', admin_dashboard_path(type: 'cancelled') %></br>
+<%= link_to 'Paid Orders', admin_dashboard_path(type: 'paid') %></br>
+<%= link_to 'Completed Orders', admin_dashboard_path(type: 'completed') %></br>
+<%= link_to 'Ordered', admin_dashboard_path(type: 'ordered') %></br></br>
+    <tr>
+      <th>Order ID</th>
+      <th>Quantity</th>
+      <th>Total</th>
+      <th>Status</th>
+    </tr>
+    </thead>
+      <tbody>
+      <% @orders.each do |order| %>
+      <tr>
+      <td><%= link_to "#{order.id}", admin_order_path(order) %></td>
+      <td><%=order.accessories.count%></td>
+      <td>$<%=order.total_price%></td>
+      <td><%=order.status%></td>
+      </tr>
+     <%end%>
+    </tbody>
+    <tfoot>
+    </tfoot>
+  </table>
+</main>
